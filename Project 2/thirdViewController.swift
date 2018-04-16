@@ -8,12 +8,14 @@
 
 import UIKit
 
-class thirdViewController: UIViewController {
+class thirdViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var bucketList = ["Move to Kauai","Travel to Paris","Get a Black Cat from Kauai Cat Cafe","Visit Italy","Get a Sulfur Crested Cockatoo"]
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+self.tableView.dataSource = self
         // Do any additional setup after loading the view.
     }
 
@@ -21,7 +23,18 @@ class thirdViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bucketList.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")!
+        let text = bucketList[indexPath.row]
+        cell.textLabel?.text = text
+        return cell
+    }
     /*
     // MARK: - Navigation
 
